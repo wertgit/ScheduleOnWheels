@@ -5,6 +5,9 @@ import com.fate.data.di.entities.Engineer
 import com.fate.scheduleonwheels.base.BaseViewModel
 import com.fate.scheduleonwheels.repo.EngineersRepository
 import com.fate.scheduleonwheels.utils.MockData
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
 
 class EngineersViewModel(private val repository: EngineersRepository) : BaseViewModel() {
 
@@ -14,8 +17,8 @@ class EngineersViewModel(private val repository: EngineersRepository) : BaseView
     private var dataEngineers: MutableLiveData<List<Engineer>> = MutableLiveData()
 
     init {
-        //  loadData()
-        mockData()
+          loadData()
+        //mockData()
 
     }
 
@@ -36,19 +39,19 @@ class EngineersViewModel(private val repository: EngineersRepository) : BaseView
 
     fun loadData() {
 
-//        disposable().add(repository.getEngineers()
-//            .subscribeOn(Schedulers.io())
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .subscribe(
-//                { result ->
-//                    dataEngineers.value = result.data
-//                    buttonVisibility.value = true
-//                },
-//                { error ->
-//                    Timber.d(error.message.toString())
-//                }
-//
-//            ))
+        disposable().add(repository.getEngineers()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { result ->
+                    dataEngineers.value = result.data
+                    buttonVisibility.value = true
+                },
+                { error ->
+                    Timber.d(error.message.toString())
+                }
+
+            ))
     }
 
 

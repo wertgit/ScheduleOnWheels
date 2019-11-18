@@ -23,9 +23,7 @@ class ScheduleOnWheelsApplication : Application() {
 
     }
 
-    /**
-     * fun to start Timber for debugging
-     */
+
     private fun startTimber() {
 
         // Only runs during development and testing

@@ -21,7 +21,7 @@ val appModule = module {
     /**
      * ViewModels
      */
-    viewModel { ActivityViewModel(get()) }
+    viewModel { ActivityViewModel() }
     viewModel { EngineersViewModel(get()) }
     viewModel { ScheduleViewModel() }
     viewModel { SharedViewModel() }

@@ -63,48 +63,54 @@ class CommonUtils {
         }
 
 
-        // Generates a weekDays's Schedule
-         fun generateSchedules(
-            list: List<Engineer>,
-            totalNumberOfWeeks: Int,
-            totalEngineersToPickAtRandom: Int
-        ): ArrayList<Schedule> {
+        fun performSwap(input: Array<Int>, index_A: Int, index_B: Int): Array<Int> {
+            val inputCopy = input.copyOf()
+            val temp = inputCopy[index_A]
+            inputCopy[index_A] = inputCopy[index_B]
+            inputCopy[index_B] = temp
 
-            // https://www.geeksforgeeks.org/kotlin-collections/
+            return inputCopy
+        }
 
-            val weekScheduledList:  ArrayList<Schedule> = arrayListOf() //
 
-            // We add a PLus one since we countring from 1 not to have Week 0
-            for (x in 0 until totalNumberOfWeeks) {
+        /**
+         * Filters the array to swap items that appear more than once in a row
+         * To avoid double shifts.
+         */
+        fun filterArray(input: ArrayList<Array<Int>>) : ArrayList<Array<Int>>{
 
-                for (i in weekDays.indices) {
+            val output : ArrayList<Array<Int>> = arrayListOf()
 
-                    val chosenEngineersList : ArrayList<Engineer> = getRandomEngineers(
-                        totalEngineersToPickAtRandom,
-                        list
-                    )
+            val arrayTop = input[0]
+            val arrayBottom = input[1]
+            var arrayTopCopy = arrayTop.copyOf()
 
-                   //  Timber.d("Chosen EngineersList : $chosenEngineersList")
 
-                    // https://stackoverflow.com/questions/46846025/how-to-clone-or-copy-a-list-in-kotlin
-                    val shiftList  = generateShifts(chosenEngineersList).toList()
+            for (x in arrayTop.indices) {
 
-                    // Timber.d("Day : ${CommonUtils.getDayName(weekDays[i])}")
-                    // Timber.d("Chosen Shift : $shiftList")
-
-                    val weekdaySchedule = Schedule(
-                        weekDays[i],
-                        "Week ${x.plus(1)}",
-                        chosenEngineersList.toList(),
-                        shiftList
-                    )
-
-                    weekScheduledList.add(weekdaySchedule)
+                if (arrayTop[x] == arrayBottom[x]) {
+                    //Timber.d("Found Similar at [$x]")
+                    arrayTopCopy = performSwap(arrayTopCopy, x, 1)
                 }
-
             }
 
-            return weekScheduledList
+            output.add(arrayTopCopy)
+            output.add(arrayBottom)
+
+            return output
+
+        }
+
+        // Generic function to splitList a list into two sublists in Java
+        fun <T> splitList(list: List<T>): Array<List<*>> {
+            // get size of the list
+            val size = list.size
+            // construct new list from the returned view by list.subList() method
+            val first = ArrayList(list.subList(0, (size + 1) / 2))
+            val second = ArrayList(list.subList((size + 1) / 2, size))
+
+            // return an List array to accommodate both lists
+            return arrayOf(first, second)
         }
 
          fun generateShifts(list: List<Engineer>) : ArrayList<Shift>  {
@@ -120,70 +126,22 @@ class CommonUtils {
             return shifts
         }
 
-        /**
-         * given a List_shouldReturnARandomElement
-         * total is the total ammount of enginners to select
-         * list is the list to pick from
-         */
-        private fun getRandomEngineers(
-            totalPicksAtRandom: Int,
-            list: List<Engineer>
-        ): ArrayList<Engineer> {
-            val pickedList: ArrayList<Engineer> = arrayListOf() //
-            var listOfEngineers: ArrayList<Engineer> = arrayListOf() //
+
+         fun getRandomItemFromList(
+            list: List<Int>
+        ): Int {
+            val pickedItem: Int
+            val listToPickFrom: ArrayList<Int> = arrayListOf() //
             var randomIndexNum = 0
-            val random = Random()  // TODO Can be Injected but caution
+            val random = Random()
+            listToPickFrom.addAll(list)
+            randomIndexNum = random.nextInt(listToPickFrom.size)  // generate a random nmuber
+            pickedItem = listToPickFrom[randomIndexNum]  // assign a random engineer
 
+            //Timber.d("Picked:  $pickedItem from list ${listOfEngineers}")
+            return pickedItem
 
-            //val listOfEngineers = list
-            // TODO // Check list Int since Int is Unique enough throws
-            // TODO // Check list is not empty throws
-            // TODO Check total is not more than the list throws
-            // TODO Check if Set or List Mutable or Immutbale is better DataStrucutre.
-
-            listOfEngineers.addAll(list)
-
-            listOfEngineers.let { ofEngineers ->
-                // Generate Rnadom Number based on items.
-
-                // TODO To make it more unique and fair shuffle the given list before picking
-                //  Timber.d("List before Reshuffle : $ofEngineers")
-                //ofEngineers.shuffle()
-                // Loop through by total and assign random enginner to list
-                for (i in 0 until totalPicksAtRandom) {
-                    randomIndexNum = random.nextInt(ofEngineers.size)  // generate a random nmuber
-                    //  Timber.d("$randomIndexNum Random Enginner: ${ofEngineers[randomIndexNum]}")
-                    val engineer = ofEngineers[randomIndexNum]  // assign a random engineer
-                    pickedList.add(engineer) // add item to picked list
-
-                    /**
-                     * Removes already picked item from list to avoid choosing same enginner
-                     */
-                    ofEngineers.removeAt(randomIndexNum) // since we are not itering through the list we can easily delete
-                    ofEngineers.shuffle() // reshufles the list
-                    // Timber.d("List after Remove and ReShuffle : $ofEngineers")
-                }
-                // During loop pop the chosen enginnerr to avoid same enginner wokring two shifts a day. and loop again.
-                ///Timber.d("Random Number:  $randomIndexNum")
-                //Timber.d("End")
-            }
-
-//        /**
-//         * Assign Shift
-//         *
-//         * Iterate through the list of picked Engneers
-//         */
-//        // iterate through a weekDays assiging enginners on each day
-//        for (i in pickedList.indices) {
-//            pickedList[i].shift = listOfShifts[i]
-//        }
-
-
-            return pickedList
         }
-
-
-
     }
 
 

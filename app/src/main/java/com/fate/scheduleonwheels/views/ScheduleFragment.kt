@@ -52,18 +52,11 @@ class ScheduleFragment : BaseFragment<FragmentScheduleBinding, ScheduleViewModel
         setupRecycler()
         observe()
 
-//        Timber.d("EngineersList: ${sharedViewModel.getEngineersList()}")
-//        val engineers = sharedViewModel.getEngineersList()
-//        if(!engineers.isNullOrEmpty())
-//        mViewModel.generateSchedule(engineers)
-
     }
 
     override fun onResume() {
         super.onResume()
         setUpAppBar()
-        //if(!sharedViewModel.getEngineersList().isNullOrEmpty())
-        //mViewModel.generateSchedule(sharedViewModel.getEngineersList())
     }
 
     private fun setupRecycler() {
