@@ -82,12 +82,104 @@ class ScheduleViewModel() : BaseViewModel() {
     }
 
 
-    fun swapItemsInArray(multiDimenArray: ArrayList<Array<Int>>){
+    fun performSwap(input: Array<Int>, index_A: Int, index_B: Int): Array<Int> {
+        val inputCopy = input.copyOf()
+        // input.copyInto(inputCopy)
+        val temp = inputCopy[index_A]
+        inputCopy[index_A] = inputCopy[index_B]
+        inputCopy[index_B] = temp
+
+        return inputCopy
+    }
+
+//    fun performSwap(input: Array<Int>,index_A : Int,index_B: Int): Array<Int>{
+//
+//        for (value in input) {
+//            print("$value ")
+//        }
+//
+//
+////        val temp = input[index_A]
+////        input[index_A] = input[index_B]
+////        input[index_B] = temp
+//
+//
+//        return input
+//    }
+
+    fun swapItemsInArray(multiDimenArray: ArrayList<Array<Int>>) {
+
+        multiDimenArray[0][0] = 5
+        multiDimenArray[0][1] = 4
+        multiDimenArray[0][2] = 3
+        multiDimenArray[0][3] = 2
+        multiDimenArray[0][4] = 1
+        multiDimenArray[1][0] = 5
+        multiDimenArray[1][1] = 4
+        multiDimenArray[1][2] = 3
+        multiDimenArray[1][3] = 2
+        multiDimenArray[1][4] = 1
+
+//        multiDimenArray[0][0] = 8
+//        multiDimenArray[0][1] = 5
+//        multiDimenArray[0][2] = 9
+//        multiDimenArray[0][3] = 5
+//        multiDimenArray[0][4] = 7
+//        multiDimenArray[1][0] = 8
+//        multiDimenArray[1][1] = 6
+//        multiDimenArray[1][2] = 9
+//        multiDimenArray[1][3] = 6
+//        multiDimenArray[1][4] = 7
+
+        var count: Int = 0
+
+        val arrayTop = multiDimenArray[0]
+        val arrayBottom = multiDimenArray[1]
+
+        var arrayTopCopy = arrayTop.copyOf()
+
+        for (x in arrayTop.indices) {
+
+            if (arrayTop[x] == arrayBottom[x]) {
+                Timber.d("Found Double Shift at [$x]")
+                arrayTopCopy = performSwap(arrayTopCopy.copyOf(), x, 1)
+            }
+        }
+
+
+        // Timber.d("Array after swap: $arrayTopCopy")
+
+        print("arrayTop")
+        println()
+        for (value in arrayTopCopy) {
+            print("$value ")
+        }
+        println()
+        print("arrayTop")
+        println()
+
+
+        val multiArray : ArrayList<Array<Int>> = arrayListOf()
+        multiArray.add(arrayTopCopy)
+        multiArray.add(arrayBottom)
+
+        Timber.d("multiArray")
+
+        for (array in multiArray) {
+            for (value in array) {
+                print("$value ")
+            }
+            println()
+        }
+
+        Timber.d("multiArray")
 
         for (j in multiDimenArray.indices) {
             for (i in multiDimenArray[j].indices) {
-                Timber.d("Position [$j][$i] and item is ${multiDimenArray[j][i]}")
+                Timber.d("Position [$j][$i] and item is ${multiDimenArray[j][i]} and The Item below it  ${multiDimenArray[count][i]}")
             }
+
+            count++
         }
 
     }
@@ -128,7 +220,7 @@ class ScheduleViewModel() : BaseViewModel() {
         // Timber.d("Lisr of Ids: $list")
 
         //val engineersRawList = mutableListOf(0,1,2,3,4,5,6,7,8,9)
-       // val engineersRawList = mutableListOf(1,2,3,4,5,6,7,8,9,10)
+        // val engineersRawList = mutableListOf(1,2,3,4,5,6,7,8,9,10)
         val engineersRawList = list
 
         // split list into two.
@@ -157,7 +249,7 @@ class ScheduleViewModel() : BaseViewModel() {
             for (j in weekShiftsArray.indices) {
                 for (i in weekShiftsArray[j].indices) {
 
-                   // Timber.d("Position [$j][$i]")
+                    // Timber.d("Position [$j][$i]")
 
                     val listCopy = groupA.toMutableList()  // make a copy of the group list
 
@@ -169,20 +261,21 @@ class ScheduleViewModel() : BaseViewModel() {
                         //Timber.d("After Remove by Weight: $groupACopy")
                     }
 
-                    if (previuos != -1 && listCopy.size > 1 ) {
+                    if (previuos != -1 && listCopy.size > 1) {
                         // remove arleady chosen Items to Obey Rule 3
 
                         listCopy.removeIf {
                             it == previuos
                         }
-                         Timber.d("groupACopy After Remove: $listCopy")
+                        Timber.d("groupACopy After Remove: $listCopy")
                         //Timber.d("After Remove by Occurance: $groupACopy")
                     }
 
                     val random = getRandomItemFromList(listCopy)
                     previuos = random
                     // Recording Weights to the HashMap
-                    hashMapOfTotalShiftsEach[previuos] = hashMapOfTotalShiftsEach[previuos]!!.plus(1)
+                    hashMapOfTotalShiftsEach[previuos] =
+                        hashMapOfTotalShiftsEach[previuos]!!.plus(1)
                     weekShiftsArray[j][i] = random
                 }
             }
@@ -196,6 +289,15 @@ class ScheduleViewModel() : BaseViewModel() {
             // Now we Iterate through the days of the week Mon to Fri Assinging Two people
 
             Timber.d("hashMapOfTotalShiftsEach: $hashMapOfTotalShiftsEach")
+
+            for (array in weekShiftsArray) {
+                for (value in array) {
+                    print("$value ")
+                }
+                println()
+            }
+
+            Timber.d("After SWAP")
 
             swapItemsInArray(weekShiftsArray)
 
@@ -242,8 +344,6 @@ class ScheduleViewModel() : BaseViewModel() {
 
 
             }
-
-
 
 
         }
