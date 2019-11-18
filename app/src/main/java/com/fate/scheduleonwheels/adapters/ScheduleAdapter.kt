@@ -47,7 +47,7 @@ class ScheduleAdapter() : RecyclerView.Adapter<ScheduleAdapter.ScheduleViewHolde
             binding.apply {
 
                 textViewDate.text = "${CommonUtils.getDayName(scheduleItem.date)}  ${scheduleItem.week}"
-                if(!scheduleItem.engineersSupporting.isNullOrEmpty()){
+                if(!scheduleItem.engineersSupporting.isNullOrEmpty() && scheduleItem.engineersSupporting.size >1){
                     textViewDayShiftEngineerName.text = scheduleItem.engineersSupporting[0].name
                     textViewDayShiftType.text = "${scheduleItem.listShifts[0]} Shift"
                     textViewNightShiftEngineerName.text = scheduleItem.engineersSupporting[1].name
