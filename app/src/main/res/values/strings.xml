@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ScheduleOnWheels</string>
+    <string name="button_text_generate_schedule">Generate Schedule</string>
+</resources>

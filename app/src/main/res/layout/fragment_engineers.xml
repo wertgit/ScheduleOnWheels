@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.fate.scheduleonwheels.viewmodels.EngineersViewModel" />
+
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".views.EngineersFragment">
+
+        <Button
+            android:text="@string/button_text_generate_schedule"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_42"
+            android:layout_marginStart="@dimen/dimen_52"
+            android:layout_marginEnd="@dimen/dimen_52"
+            android:layout_gravity="bottom"
+            android:textColor="@color/white"
+            android:layout_marginBottom="@dimen/dimen_24"
+            android:visibility="@{viewModel.buttonVisibility?View.VISIBLE:View.INVISIBLE}"
+            android:id="@+id/button_generate_schedule"
+            android:textSize="@dimen/size_14"
+            android:background="@drawable/bg_button" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_engineers_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/item_engineer" />
+
+    </FrameLayout>
+
+</layout>
