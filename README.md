@@ -11,9 +11,9 @@ The focus of this project is to create an app that generates schedules for peopl
 
 The generated schedule comprises of a list of random weekdays.
 <br/>A Weekday comprises of:
-<br/>A date from Monday to Friday
-<br/>People, two and each assigned only one shift at most in a day.
-<br/>Shifts, a day and a night shift. 
+<br/>* A date from Monday to Friday
+<br/>* People, two and each assigned only one shift at most in a day.
+<br/>* Shifts, a day and a night shift. 
 
 
 ## App Features
@@ -74,9 +74,4 @@ SearchResultActivity (Contains an overview of movies that are the result of a JS
 MovieDetailActivity (Shows detailed information about a selected movie)
 FavoritesActivity (Favorite movies of the user)
 
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
 
