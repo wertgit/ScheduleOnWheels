@@ -74,4 +74,9 @@ SearchResultActivity (Contains an overview of movies that are the result of a JS
 MovieDetailActivity (Shows detailed information about a selected movie)
 FavoritesActivity (Favorite movies of the user)
 
+## Acknowledgments
+
+* Hat tip to anyone whose code was used
+* Inspiration
+* etc
 
