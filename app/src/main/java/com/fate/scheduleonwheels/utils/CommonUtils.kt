@@ -91,6 +91,7 @@ class CommonUtils {
                 if (arrayTop[x] == arrayBottom[x]) {
                     //Timber.d("Found Similar at [$x]")
                     arrayTopCopy = performSwap(arrayTopCopy, x, 1)
+                    //Collections.swap(arrayTopCopy.toList(),x,1)
                 }
             }
 

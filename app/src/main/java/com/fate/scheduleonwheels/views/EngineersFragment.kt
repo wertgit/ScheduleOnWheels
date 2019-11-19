@@ -65,13 +65,13 @@ class EngineersFragment : BaseFragment<FragmentEngineersBinding, EngineersViewMo
     private fun observe() {
 
         mViewModel.getDataEngineers().observe(this, androidx.lifecycle.Observer {
-            if(!it.isNullOrEmpty())
-            sharedViewModel.setEngineersList(it)
+            if (!it.isNullOrEmpty())
+                sharedViewModel.setEngineersList(it)
         })
 
 
         sharedViewModel.getEngineersListLiveData().observe(this, Observer {
-            if(!it.isNullOrEmpty())
+            if (!it.isNullOrEmpty())
                 engineersAdapter.assignList(it)
         })
 
@@ -92,7 +92,7 @@ class EngineersFragment : BaseFragment<FragmentEngineersBinding, EngineersViewMo
         sharedViewModel.onGenerateSchedule()
     }
 
-    private fun setUpAppBar(){
+    private fun setUpAppBar() {
         (activity as AppCompatActivity).supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(false)
             title = "Engineers"

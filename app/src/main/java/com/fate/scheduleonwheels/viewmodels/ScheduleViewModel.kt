@@ -10,7 +10,6 @@ import com.fate.scheduleonwheels.utils.CommonUtils.Companion.filterArray
 import com.fate.scheduleonwheels.utils.CommonUtils.Companion.generateShifts
 import com.fate.scheduleonwheels.utils.CommonUtils.Companion.getRandomItemFromList
 import com.fate.scheduleonwheels.utils.CommonUtils.Companion.splitList
-import timber.log.Timber
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -74,7 +73,7 @@ class ScheduleViewModel() : BaseViewModel() {
 
         val weekdaysList: ArrayList<WeekDay> = arrayListOf()
         val shiftsArray = arrayListOf<Array<Int>>()  // multidimensional array
-        var filteredshiftsArray : ArrayList<Array<Int>> = arrayListOf<Array<Int>>()
+        var filteredshiftsArray: ArrayList<Array<Int>> = arrayListOf<Array<Int>>()
 
         // we want the array be of size 2 by 5
         for (i in 0 until 2) {
@@ -132,16 +131,22 @@ class ScheduleViewModel() : BaseViewModel() {
             }
 
 
-           // Timber.d("hashMapOfTotalShiftsEach: $hashMapOfTotalShiftsEach")
+            // Timber.d("hashMapOfTotalShiftsEach: $hashMapOfTotalShiftsEach")
 
-            filteredshiftsArray =  filterArray(shiftsArray)  // To remove Double Shifts
+            filteredshiftsArray = filterArray(shiftsArray)  // To remove Double Shifts
 
             // Now we Iterate through the days of the week Mon to Fri Assinging Weekkdays
             for (i in CommonUtils.weekDays.indices) {
 
                 val a = filteredshiftsArray[0][i]
                 val b = filteredshiftsArray[1][i]
-                weekdaysList.add(WeekDay(CommonUtils.weekDays[i],"Week ${x.plus(1)}",listOf(a,b)))
+                weekdaysList.add(
+                    WeekDay(
+                        CommonUtils.weekDays[i],
+                        "Week ${x.plus(1)}",
+                        listOf(a, b)
+                    )
+                )
 
             }
 
@@ -150,9 +155,6 @@ class ScheduleViewModel() : BaseViewModel() {
         return weekdaysList
 
     }
-
-
-
 
 
 }

@@ -14,9 +14,8 @@ import com.fate.scheduleonwheels.base.BaseFragment
 import com.fate.scheduleonwheels.databinding.FragmentScheduleBinding
 import com.fate.scheduleonwheels.viewmodels.ScheduleViewModel
 import com.fate.scheduleonwheels.viewmodels.SharedViewModel
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
-import timber.log.Timber
+import org.koin.android.ext.android.inject
 
 
 class ScheduleFragment : BaseFragment<FragmentScheduleBinding, ScheduleViewModel>() {
@@ -78,12 +77,12 @@ class ScheduleFragment : BaseFragment<FragmentScheduleBinding, ScheduleViewModel
         })
 
         sharedViewModel.getEngineersListLiveData().observe(this, Observer {
-            if(!it.isNullOrEmpty())
+            if (!it.isNullOrEmpty())
                 mViewModel.generateSchedule(it)
         })
     }
 
-    private fun setUpAppBar(){
+    private fun setUpAppBar() {
         (activity as AppCompatActivity).supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
             title = "Schedule"

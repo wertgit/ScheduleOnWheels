@@ -22,15 +22,15 @@ class SharedViewModel : ViewModel() {
         return command
     }
 
-    fun getEngineersListLiveData(): MutableLiveData<List<Engineer>>  {
+    fun getEngineersListLiveData(): MutableLiveData<List<Engineer>> {
         return dataEngineersList
     }
 
-    fun setEngineersList(list:List<Engineer>){
+    fun setEngineersList(list: List<Engineer>) {
         dataEngineersList.value = list
     }
 
-    fun onGenerateSchedule(){
+    fun onGenerateSchedule() {
         command.value = Event((SharedViewModelCommand.OnGenerateSchedule))
     }
 }
