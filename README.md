@@ -1,6 +1,6 @@
 # ScheduleOnWheels Android App
 
-A shifts scheduling app that uses the clean architecture approach and is written in Kotlin.
+A work shifts' scheduling app that uses the clean architecture approach and is written in Kotlin.
 
 ## About This Project
 The focus of this project is to create an app that generates schedules for people to take turns supporting a company's buisness.
