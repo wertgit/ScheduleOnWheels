@@ -8,8 +8,8 @@ The focus of this project is to create an app that generates schedules for peopl
 <br/>We assume a company has 10 people and that the generated schedule should span a period of two weeks starting first working day. 
 
 <br/>The generated schedule takes in account that each person should complete 2 shifts in the given two weeks period and a person cannot have more than one shift on any consecutive days.
-
 The generated schedule comprises of a list of random weekdays.
+
 <br/>A Weekday comprises of:
 * A date from Monday to Friday
 * People, two and each assigned only one shift at most in a day.
@@ -17,13 +17,12 @@ The generated schedule comprises of a list of random weekdays.
 
 
 ## App Features
-<br/>-Shows a list of fetched people.
-<br/>-Shows a list of generated schedule
+* Shows a list of fetched people.
+* Shows a list of generated schedule.
 
 ## Architecture
 The architecture is built around Android Architecture Components( LiveData,ViewModel,Repository ) using MVVM pattern by the help of Retrofit for consuming rest api data.
-<br/>Project is seperated in terms of modules, app and data
-<br/>Classes are devided into the following packages: activities, adapters, data, helpers, models.
+<br/>Project is designed with separate layerer modules (app and data) to make it easier to maintain, read, extend and test.
 
 
 ## RESTful API
@@ -40,7 +39,7 @@ https://app.apiary.io/
 <br/>-News Api
 <br/>$ ls *.shGlide
 <br/>-Recyclerview
-
+* Data Access with RxJava 
 Foundation - Components for core system capabilities, Kotlin extensions and support for multidex and automated testing.
 AppCompat - Degrade gracefully on older versions of Android.
 Android KTX - Write more concise, idiomatic Kotlin code.
@@ -61,7 +60,7 @@ Third party
 Glide for image loading
 Kotlin Coroutines for managing background threads with simplified code and reducing needs for callbacks
 
-We used Fragments to later on simplfy the Activity app using Navigation component.
+We used Fragments to later on simplfy the Activity app using Navigation component.Single Activity app using Conductor library
 
 We used Koin for dependency injection and we heavily relied on dagger-android to abstract away boiler-plate code.
 
