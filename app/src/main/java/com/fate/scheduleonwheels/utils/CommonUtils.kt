@@ -36,7 +36,7 @@ class CommonUtils {
                     listOfEngineers.add(mapEngineers[chosenIds[j]]!!)
                 }
 
-                val listShifts = generateShifts(listOfEngineers).toList()
+                val listShifts = generateShifts(engineerIds).toList()
 
                 val weekdaySchedule = Schedule(
                     weekdays[i].date,
@@ -164,14 +164,13 @@ class CommonUtils {
          * We assign Calendar days for a speicifc day of weekDays.
          *
          */
-        private val weekDays: ArrayList<Int> = arrayListOf(
+        private val weekDays: Array<Int> = arrayOf(
             Calendar.MONDAY,
             Calendar.TUESDAY,
             Calendar.WEDNESDAY,
             Calendar.THURSDAY,
             Calendar.FRIDAY
         )
-
 
         /**
          * returns a Calendar Day name based on the dateId.
@@ -251,7 +250,7 @@ class CommonUtils {
          * @param list the Engineer list to generate based from
          * @return a list of generated shifts.
          */
-        private fun generateShifts(list: List<Engineer>): List<Shift> {
+        private fun generateShifts(list: List<Int>): List<Shift> {
 
             val shifts: ArrayList<Shift> = arrayListOf()
             var shiftToggle = false // switches shift evey iteration
