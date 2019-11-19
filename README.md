@@ -32,11 +32,14 @@ https://app.apiary.io/
 
 ## Libraries and Techniques Used
 * Android Architecture Components (Live Data, View Model)
-* Retrofit for networking 
-* Rxjava for data access
-* Timber for debugging
+* Retrofit for networking. 
+* Rxjava for data access.
+* Timber for debugging.
 * Shared ViewModel for communication between Activity and fragments.
+* Data Binding for binding UI elements to accelerate devleoplment and elimitae boilerplate code.
 * Recyclerview for displaying lists.
-* Koin for perfomring Depedency Injection. 
+* Koin for perfomring Depedency Injection.
+* Base Classes declared for Fragments and ViewModels and ViewHolders because we don't want to reinvent the wheel by writing the same boilerplate code again and again. :)
+
 
 
