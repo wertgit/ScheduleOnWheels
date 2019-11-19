@@ -1,4 +1,4 @@
-package com.fate.data.di.entities
+package com.fate.data.data.entities
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

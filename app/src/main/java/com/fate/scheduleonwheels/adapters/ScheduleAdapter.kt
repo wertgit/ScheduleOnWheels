@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.fate.data.di.entities.Schedule
+import com.fate.data.data.entities.Schedule
 import com.fate.scheduleonwheels.databinding.ItemScheduleBinding
 import com.fate.scheduleonwheels.utils.CommonUtils
 

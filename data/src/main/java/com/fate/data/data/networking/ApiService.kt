@@ -1,6 +1,6 @@
-package com.fate.data.di.networking
+package com.fate.data.data.networking
 
-import com.fate.data.di.entities.EngineersResponce
+import com.fate.data.data.entities.EngineersResponce
 import io.reactivex.Single
 import retrofit2.http.GET
 

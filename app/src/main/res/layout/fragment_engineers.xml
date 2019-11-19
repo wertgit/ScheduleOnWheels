@@ -27,7 +27,6 @@
             android:layout_gravity="bottom"
             android:textColor="@color/white"
             android:layout_marginBottom="@dimen/dimen_24"
-            android:visibility="@{viewModel.buttonVisibility?View.VISIBLE:View.INVISIBLE}"
             android:id="@+id/button_generate_schedule"
             android:textSize="@dimen/size_14"
             android:background="@drawable/bg_button" />

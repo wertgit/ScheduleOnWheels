@@ -1,7 +1,7 @@
 package com.fate.scheduleonwheels.repo
 
-import com.fate.data.di.entities.EngineersResponce
-import com.fate.data.di.managers.DataManager
+import com.fate.data.data.entities.EngineersResponce
+import com.fate.data.data.managers.DataManager
 
 import io.reactivex.Single
 

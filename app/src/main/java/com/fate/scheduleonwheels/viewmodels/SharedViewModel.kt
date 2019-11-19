@@ -2,7 +2,7 @@ package com.fate.scheduleonwheels.viewmodels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.fate.data.di.entities.Engineer
+import com.fate.data.data.entities.Engineer
 import com.fate.scheduleonwheels.commands.SharedViewModelCommand
 import com.fate.scheduleonwheels.common.Event
 

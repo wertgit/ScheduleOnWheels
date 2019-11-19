@@ -1,8 +1,7 @@
-package com.fate.data.di.managers
+package com.fate.data.data.managers
 
-import android.content.Context
-import com.fate.data.di.entities.EngineersResponce
-import com.fate.data.di.networking.ApiService
+import com.fate.data.data.entities.EngineersResponce
+import com.fate.data.data.networking.ApiService
 import io.reactivex.Single
 
 internal class AppDataManager(

@@ -1,8 +1,8 @@
 package com.fate.scheduleonwheels.application
 
 import android.app.Application
-import com.fate.data.di.dataModule
-import com.fate.data.di.networkModule
+import com.fate.data.data.dataModule
+import com.fate.data.data.networkModule
 import com.fate.scheduleonwheels.BuildConfig
 import com.fate.scheduleonwheels.di.appModule
 import com.fate.scheduleonwheels.di.reposModule

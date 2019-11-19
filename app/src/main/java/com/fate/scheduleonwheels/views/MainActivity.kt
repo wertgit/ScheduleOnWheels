@@ -62,11 +62,11 @@ class MainActivity : AppCompatActivity() {
         mViewBinding.executePendingBindings()
     }
 
-    private fun displayEngineersScreen() {
+    fun displayEngineersScreen() {
         loadFragment(EngineersFragment.newInstance(), EngineersFragment.TAG)
     }
 
-    private fun displayScheduleScreen() {
+    fun displayScheduleScreen() {
         loadFragment(ScheduleFragment.newInstance(), ScheduleFragment.TAG)
     }
 

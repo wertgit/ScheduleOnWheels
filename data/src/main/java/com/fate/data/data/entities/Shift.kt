@@ -1,4 +1,4 @@
-package com.fate.data.di.entities
+package com.fate.data.data.entities
 
 /**
  * Enum Class to Represent the Constant Swift Types of Day and Night

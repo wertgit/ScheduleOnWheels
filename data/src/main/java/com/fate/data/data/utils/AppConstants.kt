@@ -1,4 +1,4 @@
-package com.fate.data.di.utils
+package com.fate.data.data.utils
 
 /**
  *  Contains commonly used constant values accessible threwout the app

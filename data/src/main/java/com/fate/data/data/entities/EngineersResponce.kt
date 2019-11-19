@@ -1,4 +1,4 @@
-package com.fate.data.di.entities
+package com.fate.data.data.entities
 
 import android.os.Parcelable
 import com.google.gson.annotations.Expose
@@ -7,12 +7,9 @@ import kotlinx.android.parcel.Parcelize
 
 
 @Parcelize
-data class Engineer(
+data class EngineersResponce(
 
-    @SerializedName("id")
+    @SerializedName("engineers")
     @Expose
-    var id: Int,
-    @SerializedName("name")
-    @Expose
-    var name: String
-): Parcelable
+    var data: List<Engineer>
+) : Parcelable

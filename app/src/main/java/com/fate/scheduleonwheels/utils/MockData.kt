@@ -1,6 +1,6 @@
 package com.fate.scheduleonwheels.utils
 
-import com.fate.data.di.entities.Engineer
+import com.fate.data.data.entities.Engineer
 
 
 class MockData {

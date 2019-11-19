@@ -3,7 +3,7 @@ package com.fate.scheduleonwheels.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.fate.data.di.entities.Engineer
+import com.fate.data.data.entities.Engineer
 import com.fate.scheduleonwheels.databinding.ItemEngineerBinding
 
 

@@ -1,9 +1,9 @@
 package com.fate.scheduleonwheels.utils
 
-import com.fate.data.di.entities.Engineer
-import com.fate.data.di.entities.Schedule
-import com.fate.data.di.entities.Shift
-import com.fate.data.di.entities.WeekDay
+import com.fate.data.data.entities.Engineer
+import com.fate.data.data.entities.Schedule
+import com.fate.data.data.entities.Shift
+import com.fate.data.data.entities.WeekDay
 import java.util.*
 
 
@@ -36,7 +36,7 @@ class CommonUtils {
                     listOfEngineers.add(mapEngineers[chosenIds[j]]!!)
                 }
 
-                val listShifts = generateShifts(engineerIds).toList()
+                val listShifts = generateShifts(2).toList()
 
                 val weekdaySchedule = Schedule(
                     weekdays[i].date,
@@ -68,14 +68,14 @@ class CommonUtils {
             var filteredArray: ArrayList<Array<Int>>
 
             // split list into two parts
-            val arrayOfLists = splitList(list)
+            val listChunk = list.chunked(list.size/2)
 
-            for (x in arrayOfLists.indices) {
+            for (x in listChunk.indices) {
 
                 var prevSelection: Int = -1
 
                 /// assign a part
-                val part = arrayOfLists[x]
+                val part = listChunk[x]
 
 
                 // creates HasMap with Engineer ID as key and ammount of shifts assigned as value.
@@ -164,7 +164,7 @@ class CommonUtils {
          * We assign Calendar days for a speicifc day of weekDays.
          *
          */
-        private val weekDays: Array<Int> = arrayOf(
+         val weekDays: Array<Int> = arrayOf(
             Calendar.MONDAY,
             Calendar.TUESDAY,
             Calendar.WEDNESDAY,
@@ -247,16 +247,16 @@ class CommonUtils {
 
         /**
          * function Generate shifts by total number of items in list.
-         * @param list the Engineer list to generate based from
+         * @param minimum 2
          * @return a list of generated shifts.
          */
-        private fun generateShifts(list: List<Int>): List<Shift> {
+        fun generateShifts(maximum:Int): List<Shift> {
 
             val shifts: ArrayList<Shift> = arrayListOf()
             var shiftToggle = false // switches shift evey iteration
             var shift: Shift
 
-            for (x in list.indices) {
+            for (x in 0 until maximum) {
                 shiftToggle = !shiftToggle
                 shift = if (shiftToggle) Shift.DAY else Shift.NIGHT
                 shifts.add(shift)

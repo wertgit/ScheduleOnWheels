@@ -1,13 +1,10 @@
-package com.fate.data.di
+package com.fate.data.data
 
 
-import android.content.Context
-import android.net.ConnectivityManager
-import android.net.wifi.WifiManager
 import com.fate.data.BuildConfig
-import com.fate.data.di.networking.ApiService
-import com.fate.data.di.networking.RestApiManager
-import com.fate.data.di.utils.AppConstants
+import com.fate.data.data.networking.ApiService
+import com.fate.data.data.networking.RestApiManager
+import com.fate.data.data.utils.AppConstants
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.core.qualifier.StringQualifier
@@ -17,7 +14,6 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.net.ssl.HttpsURLConnection
-import javax.net.ssl.SSLSessionContext
 
 
 val networkModule = module {
