@@ -2,7 +2,7 @@
 
 A shifts scheduling app that uses the clean architecture approach and is written in Kotlin.
 
-# About This Project
+## About This Project
 The focus of this project is to create an app that generates schedules for people to take turns supporting a company's buisness.
 <br/>The app chooses two random people to both complete a half day of support.
 <br/>We assume a company has 10 people and that the generated schedule should span a period of two weeks starting first working day. 
@@ -10,28 +10,28 @@ The focus of this project is to create an app that generates schedules for peopl
 <br/>The generated schedule takes in account that each person should complete 2 shifts in the given two weeks period and a person cannot have more than one shift on any consecutive days.
 
 The generated schedule comprises of a list of random weekdays.
-<br/>A Weekdays includes:
-<br/>-A date from Monday to Friday
-<br/>-Two People, each assigned only one shift at most in a day.
-<br/>-Two shifts, a day and a night shift. 
+<br/>A Weekday comprises of:
+<br/>A date from Monday to Friday
+<br/>People, two and each assigned only one shift at most in a day.
+<br/>Shifts, a day and a night shift. 
 
 
-# App Features
+## App Features
 <br/>-Shows a list of fetched people.
 <br/>-Shows a list of generated schedule
 
-# Architecture
+## Architecture
 The architecture is built around Android Architecture Components( LiveData,ViewModel,Repository ) using MVVM pattern by the help of Retrofit for consuming rest api data.
 <br/>Project is seperated in terms of modules, app and data
 <br/>Classes are devided into the following packages: activities, adapters, data, helpers, models.
 
 
-# RESTful API
+## RESTful API
 The app mock API was created using Apiary. The Apiary is powerful API design stack that is built for developers.
 <br/>You can find more information on their website.
 https://app.apiary.io/
 
-# Libraries and Techniques Used
+## Libraries and Techniques Used
 <br/>-Android Architecture Components
 <br/>-Live Data
 <br/>-View Model
