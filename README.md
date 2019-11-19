@@ -39,7 +39,8 @@ https://app.apiary.io/
 * Data Binding for binding UI elements to accelerate development and eliminate boilerplate code.
 * Recyclerview for displaying lists.
 * Koin for performing Dependency Injection using Singleton and Factory Patterns.
-* Base Classes declared for Fragments and ViewModels and ViewHolders because we don't want to reinvent the wheel by writing the same boilerplate code again and again. :)
+* Base Classes declared for Fragments and ViewModels and ViewHolders because we don't want to reinvent the wheel by writing the same boilerplate code again and again. 
+* Espresso for writing Android UI tests. :)
 
 
 
