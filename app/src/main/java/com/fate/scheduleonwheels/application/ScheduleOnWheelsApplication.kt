@@ -6,7 +6,6 @@ import com.fate.data.di.networkModule
 import com.fate.scheduleonwheels.BuildConfig
 import com.fate.scheduleonwheels.di.appModule
 import com.fate.scheduleonwheels.di.reposModule
-import net.danlew.android.joda.JodaTimeAndroid
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -19,8 +18,6 @@ class ScheduleOnWheelsApplication : Application() {
         super.onCreate()
         startKoin()
         startTimber()
-        JodaTimeAndroid.init(this);
-
     }
 
 

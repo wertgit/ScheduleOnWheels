@@ -18,6 +18,9 @@ import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
 
+/**
+ * A fragment representing a list of Engineers.
+ */
 class EngineersFragment : BaseFragment<FragmentEngineersBinding, EngineersViewModel>() {
 
     private val mViewModel: EngineersViewModel by inject()

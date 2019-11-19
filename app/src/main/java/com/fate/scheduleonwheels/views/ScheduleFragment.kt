@@ -18,6 +18,9 @@ import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 import org.koin.android.ext.android.inject
 
 
+/**
+ * A fragment representing a list of WeekDay Schedules.
+ */
 class ScheduleFragment : BaseFragment<FragmentScheduleBinding, ScheduleViewModel>() {
 
     private val mViewModel: ScheduleViewModel by inject()

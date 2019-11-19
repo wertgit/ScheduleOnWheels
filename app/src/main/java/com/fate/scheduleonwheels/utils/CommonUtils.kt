@@ -11,6 +11,12 @@ class CommonUtils {
 
     companion object {
 
+
+        /**
+         * A helper function to generate a list of Schedules
+         * The Algorithm is roughly based on the fact that we are dealing with only 10 Engineers
+         * and a span of 2 weeks.
+         */
         fun generateSchedule(list: List<Engineer>): ArrayList<Schedule> {
 
             val scheduleList: ArrayList<Schedule> = arrayListOf()
@@ -18,25 +24,24 @@ class CommonUtils {
             val engineerIds = ArrayList(mapEngineers.keys)
             val weekdays = generateWeekDays(engineerIds)
 
-            /**
-             * creates a whole Schedule by looping through the weekdays
-             */
+
+            // Creates a Schedule iterating through the weekdays.
             for (i in weekdays.indices) {
 
-                val chosenListOfEngineers = mutableListOf<Engineer>()
+                val listOfEngineers = mutableListOf<Engineer>()
                 val chosenIds = weekdays[i].ids
 
-                // loop through ids mapping with Engineer HashMap
+                // loop through chosen ids mapping them with Engineer ones.
                 for (j in chosenIds.indices) {
-                    chosenListOfEngineers.add(mapEngineers[chosenIds[j]]!!)
+                    listOfEngineers.add(mapEngineers[chosenIds[j]]!!)
                 }
 
-                val listShifts = generateShifts(chosenListOfEngineers).toList()
+                val listShifts = generateShifts(listOfEngineers).toList()
 
                 val weekdaySchedule = Schedule(
                     weekdays[i].date,
                     weekdays[i].week,
-                    chosenListOfEngineers.toList(),
+                    listOfEngineers.toList(),
                     listShifts
                 )
 
@@ -49,64 +54,74 @@ class CommonUtils {
         }
 
 
-        private fun generateWeekDays(list: MutableList<Int>): ArrayList<WeekDay> {
+        /**
+         *   function generates a list of week-days by plotting a shift multidimensional array
+         *   filtering the multidimensional array and generates weekday items.
+         *  @param list the list of engineers
+         * @return a list of week-days
+         */
+        private fun generateWeekDays(list: MutableList<Int>): List<WeekDay> {
 
             val weekdaysList: ArrayList<WeekDay> = arrayListOf()
             val shiftsArray =
-                intializeArray()  // multidimensional array representing the shifts to fill in a week.
+                intializeArray()  // Multidimensional array representing shifts to fill in a week.
             var filteredArray: ArrayList<Array<Int>>
 
-            // splitList list into two
-            val splitList = splitList(list)
+            // split list into two parts
+            val arrayOfLists = splitList(list)
 
-            for (x in splitList.indices) {
+            for (x in arrayOfLists.indices) {
 
                 var prevSelection: Int = -1
-                /// Assign Group
-                val group = splitList[x]
 
-                val hashMapOfTotalShiftsEach: HashMap<Int, Int> = hashMapOf()
-                // Create Weight HasMap
-                for (i in group.indices) {
-                    hashMapOfTotalShiftsEach[group[i]] = 0
+                /// assign a part
+                val part = arrayOfLists[x]
+
+
+                // creates HasMap with Engineer ID as key and ammount of shifts assigned as value.
+                val mapOfTotalShiftsAssigned: HashMap<Int, Int> = hashMapOf()
+                for (i in part.indices) {
+                    mapOfTotalShiftsAssigned[part[i]] = 0
                 }
 
-                // Iterate picking out Random Numbers.
+                // Iterate picking a random value and plottig it to the multidimensional array
                 for (j in shiftsArray.indices) {
 
                     for (i in shiftsArray[j].indices) {
 
-                        val listCopy = group.toMutableList()  // make a copy of the group list
+                        val listCopy = part.toMutableList()
 
-                        if (!hashMapOfTotalShiftsEach.isNullOrEmpty() && listCopy.size > 1) {
-                            // removes items that appear more than twice
+                        if (!mapOfTotalShiftsAssigned.isNullOrEmpty() && listCopy.size > 1) {
+                            // removes any engineer that arleady has more than one shifts assgined
+                            // so we equally assign shifts.
                             listCopy.removeIf {
-                                hashMapOfTotalShiftsEach[it]!! > 1
+                                mapOfTotalShiftsAssigned[it]!! > 1
                             }
                         }
 
                         if (prevSelection != -1 && listCopy.size > 1) {
-                            // remove arleady chosen Items to Obey Rule 3
+                            // removes arleady chosen engineer based on previuos choice
+                            // so we avoid state where an engineer works more than once consecutively.
                             listCopy.removeIf {
                                 it == prevSelection
                             }
                         }
 
-                        val random = getRandomItemFromList(listCopy)
-                        prevSelection = random
-                        // Recording Weights to the HashMap
-                        hashMapOfTotalShiftsEach[prevSelection] =
-                            hashMapOfTotalShiftsEach[prevSelection]!!.plus(1)
-                        shiftsArray[j][i] = random
+                        val randomItem = getRandomItemFromList(listCopy)
+
+                        prevSelection = randomItem
+
+                        // record ammount of shifts assigned
+                        mapOfTotalShiftsAssigned[prevSelection] =
+                            mapOfTotalShiftsAssigned[prevSelection]!!.plus(1)
+                        shiftsArray[j][i] = randomItem
                     }
                 }
 
+                // Handles situation where an engineer is assigned Double Shifts.
+                filteredArray = filterArray(shiftsArray)
 
-                // Timber.d("hashMapOfTotalShiftsEach: $hashMapOfTotalShiftsEach")
-
-                filteredArray = filterArray(shiftsArray)  // To remove Double Shifts
-
-                // Now we Iterate through the days of the week Mon to Fri Assinging Weekkdays
+                // Iterate through the days of the week Mon to Fri generating a weekday item.
                 for (i in weekDays.indices) {
 
                     val a = filteredArray.first()[i]
@@ -129,15 +144,15 @@ class CommonUtils {
 
 
         /**
-         * Intialzes array by setting the size and intial value.
-         * Here the size is 2 by 5 and the value is 0
+         *  function intializes multidimensional array by setting the size and intial value.
+         *  The multidimensional array is of size 2 by 5 and the intial value assigned is 0
          */
         private fun intializeArray(): ArrayList<Array<Int>> {
             val output: ArrayList<Array<Int>> = arrayListOf()
             for (i in 0 until 2) {
                 var array = arrayOf<Int>()
                 for (j in 0..4) {
-                    array += 0  // assings zero as intial value
+                    array += 0  // assigns zero as intial value
                 }
                 output += array
             }
@@ -145,11 +160,11 @@ class CommonUtils {
         }
 
         /**
-         * Since we assume Schedule will span two weeks and start on first work day end on last work day.
-         * We can assign numbers for a speicifc day of weekDays or better yet use Calendar.DayOFWeek
-         * Val since it will not change
+         * Since we assume a schedule will span two weeks and start on first work day end on last work day.
+         * We assign Calendar days for a speicifc day of weekDays.
+         *
          */
-       private  val weekDays: ArrayList<Int> = arrayListOf(
+        private val weekDays: ArrayList<Int> = arrayListOf(
             Calendar.MONDAY,
             Calendar.TUESDAY,
             Calendar.WEDNESDAY,
@@ -187,7 +202,8 @@ class CommonUtils {
 
 
         /**
-         * Filters the array to swap items that appear more than once in a row
+         * function compares values of array in the first and second row.
+         * Swaps the values in the first row if they are equal.
          * To avoid double shifts.
          */
         fun filterArray(input: ArrayList<Array<Int>>): ArrayList<Array<Int>> {
@@ -203,7 +219,6 @@ class CommonUtils {
                 if (firstRow[x] == secondRow[x]) {
                     //Timber.d("Found Similar at [$x]")
                     firstRowCopy = performSwap(firstRowCopy, x)
-                    //Collections.swap(arrayTopCopy.toList(),x,1)
                 }
             }
 
@@ -214,7 +229,12 @@ class CommonUtils {
 
         }
 
-        // Function to splitList a list of Int into two sublists in Java // Based on two weeks
+        /**
+         *   function to split a list into two sub lists
+         *   This function always assumes we dealing with two items
+         *  @param list the list to split from.
+         * @return a list split into two parts.
+         */
         fun splitList(list: List<Int>): Array<List<Int>> {
             // get size of the list
             val size = list.size
@@ -226,34 +246,39 @@ class CommonUtils {
             return arrayOf(first, second)
         }
 
-        fun generateShifts(list: List<Engineer>): ArrayList<Shift> {
+        /**
+         * function Generate shifts by total number of items in list.
+         * @param list the Engineer list to generate based from
+         * @return a list of generated shifts.
+         */
+        private fun generateShifts(list: List<Engineer>): List<Shift> {
 
-            val listOfShifts: List<Shift> = listOf(Shift.DAY, Shift.NIGHT)
-
-            val shifts: ArrayList<Shift> = arrayListOf() //
-            var shiftPosition = 0
+            val shifts: ArrayList<Shift> = arrayListOf()
+            var shiftToggle = false // switches shift evey iteration
+            var shift: Shift
 
             for (x in list.indices) {
-                shifts.add(listOfShifts[shiftPosition])
-                // checks to reset the shifPostion when it reaches 1
-                if (shiftPosition <= 0) shiftPosition += 1 else shiftPosition = 0
+                shiftToggle = !shiftToggle
+                shift = if (shiftToggle) Shift.DAY else Shift.NIGHT
+                shifts.add(shift)
             }
             return shifts
         }
 
 
-        fun getRandomItemFromList(
-            list: List<Int>
-        ): Int {
+        /**
+         * function to pick a random Item from a list
+         * @param list the list to pick from.
+         * @return an Int of a random Item.
+         */
+        private fun getRandomItemFromList(list: List<Int>): Int {
             val pickedItem: Int
-            val listToPickFrom: ArrayList<Int> = arrayListOf() //
+            val listToPickFrom: ArrayList<Int> = arrayListOf()
             var randomIndexNum = 0
             val random = Random()
             listToPickFrom.addAll(list)
-            randomIndexNum = random.nextInt(listToPickFrom.size)  // generate a random nmuber
-            pickedItem = listToPickFrom[randomIndexNum]  // assign a random engineer
-
-            //Timber.d("Picked:  $pickedItem from list ${listOfEngineers}")
+            randomIndexNum = random.nextInt(listToPickFrom.size)
+            pickedItem = listToPickFrom[randomIndexNum]
             return pickedItem
 
         }

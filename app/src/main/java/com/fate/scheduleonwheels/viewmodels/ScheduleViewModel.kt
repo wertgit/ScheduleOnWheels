@@ -7,6 +7,9 @@ import com.fate.scheduleonwheels.base.BaseViewModel
 import com.fate.scheduleonwheels.utils.CommonUtils.Companion.generateSchedule
 
 
+/**
+ * The ViewModel used in [ScheduleFragment]
+ */
 class ScheduleViewModel() : BaseViewModel() {
 
     private var dataSchedule: MutableLiveData<ArrayList<Schedule>> = MutableLiveData()

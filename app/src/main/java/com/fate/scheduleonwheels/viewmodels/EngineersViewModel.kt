@@ -9,6 +9,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 
+/**
+ * The ViewModel used in [EngineersFragment]
+ */
 class EngineersViewModel(private val repository: EngineersRepository) : BaseViewModel() {
 
 
