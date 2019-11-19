@@ -78,7 +78,7 @@ class ScheduleFragment : BaseFragment<FragmentScheduleBinding, ScheduleViewModel
 
         sharedViewModel.getEngineersListLiveData().observe(this, Observer {
             if (!it.isNullOrEmpty())
-                mViewModel.generateSchedule(it)
+                mViewModel.onGenerateSchedule(it)
         })
     }
 

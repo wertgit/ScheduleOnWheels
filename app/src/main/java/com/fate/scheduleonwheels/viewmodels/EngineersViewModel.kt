@@ -19,7 +19,6 @@ class EngineersViewModel(private val repository: EngineersRepository) : BaseView
     init {
         loadData()
         //mockData()
-
     }
 
     fun getDataEngineers(): MutableLiveData<List<Engineer>> {
@@ -31,10 +30,8 @@ class EngineersViewModel(private val repository: EngineersRepository) : BaseView
      * Cache Data or Store in Room but this is faster for testing.
      */
     fun mockData() {
-
         dataEngineers.value = MockData.mockedEngineersList
         buttonVisibility.value = true
-
     }
 
     fun loadData() {
