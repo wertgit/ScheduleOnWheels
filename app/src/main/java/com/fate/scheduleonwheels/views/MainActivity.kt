@@ -23,6 +23,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mViewBinding: ActivityMainBinding
     private val viewModel: ActivityViewModel by inject()
     private lateinit var sharedViewModel: SharedViewModel
+    private val testingVal:String? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
